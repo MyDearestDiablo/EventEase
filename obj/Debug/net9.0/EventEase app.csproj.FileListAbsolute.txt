@@ -1,0 +1,29 @@
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.staticwebassets.runtime.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.staticwebassets.endpoints.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.exe
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.deps.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.runtimeconfig.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.dll
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\EventEase app.pdb
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\Microsoft.AspNetCore.Components.WebAssembly.dll
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\bin\Debug\net9.0\Microsoft.JSInterop.WebAssembly.dll
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.csproj.AssemblyReference.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.AssemblyInfoInputs.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.AssemblyInfo.cs
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.csproj.CoreCompileInputs.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\scopedcss\bundle\EventEase app.styles.css
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\compressed\0jrvyd5v5y-e8aouqntr1.gz
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\compressed\lun88tfyvy-7geogm38t1.gz
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\compressed\zt0f3ichle-xllnj7o435.gz
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEas.C31C8815.Up2Date
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.dll
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\refint\EventEase app.dll
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.pdb
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\EventEase app.genruntimeconfig.cache
+C:\Users\eliza\Documents\Coursera\EventEase app\EventEase app\obj\Debug\net9.0\ref\EventEase app.dll

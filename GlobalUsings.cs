@@ -1,0 +1,9 @@
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Components;
+global using Microsoft.AspNetCore.Components.Forms;
+global using Microsoft.AspNetCore.Components.Routing;
+global using Microsoft.AspNetCore.Components.Web;
+global using EventEase_app.Models;
+global using EventEase_app.Services;
+global using EventEase_app.Components;
+global using EventEase_app.Shared;

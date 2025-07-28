@@ -1,0 +1,345 @@
+@page "/events/{eventId:int}"
+@using EventEase_app.Models
+@using EventEase_app.Services
+@inject EventService EventService
+@inject NavigationManager Navigation
+
+@if (eventItem != null)
+{
+    <div class="event-details-container">
+        <div class="back-button">
+            <button class="btn btn-outline-secondary" @onclick="GoBack">
+                ← Back to Events
+            </button>
+        </div>
+
+        <div class="event-details-header">
+            @if (!string.IsNullOrEmpty(eventItem.ImageUrl))
+            {
+                <img src="@eventItem.ImageUrl" alt="@eventItem.Name" class="event-hero-image" />
+            }
+            else
+            {
+                <div class="event-hero-placeholder">
+                    <span>📅</span>
+                </div>
+            }
+            <div class="event-hero-overlay">
+                <h1>@eventItem.Name</h1>
+                <div class="event-quick-info">
+                    <span class="info-item">
+                        <strong>📅 @eventItem.Date.ToString("MMMM dd, yyyy")</strong>
+                    </span>
+                    <span class="info-item">
+                        <strong>🕒 @eventItem.Date.ToString("h:mm tt")</strong>
+                    </span>
+                    <span class="info-item">
+                        <strong>📍 @eventItem.Location</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-details-content">
+            <div class="main-content">
+                <section class="event-description">
+                    <h2>About This Event</h2>
+                    <p>@eventItem.Description</p>
+                </section>
+
+                <section class="event-info">
+                    <h2>Event Information</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>📅 Date & Time</h3>
+                            <p>@eventItem.Date.ToString("dddd, MMMM dd, yyyy")</p>
+                            <p>@eventItem.Date.ToString("h:mm tt")</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>📍 Location</h3>
+                            <p>@eventItem.Location</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>💰 Price</h3>
+                            <p>@(eventItem.Price > 0 ? $"${eventItem.Price:F2}" : "Free")</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>👥 Capacity</h3>
+                            <p>@eventItem.MaxAttendees attendees</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <div class="registration-card">
+                    <h3>Register for this Event</h3>
+                    <div class="price-display">
+                        @if (eventItem.Price > 0)
+                        {
+                            <span class="price">$@eventItem.Price.ToString("F2")</span>
+                        }
+                        else
+                        {
+                            <span class="price free">Free</span>
+                        }
+                    </div>
+                    <button class="btn btn-success btn-lg register-btn" @onclick="RegisterForEvent">
+                        Register Now
+                    </button>
+                    <p class="registration-note">
+                        Secure your spot for this amazing event!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (notFound)
+{
+    <div class="not-found">
+        <h1>Event Not Found</h1>
+        <p>The event you're looking for doesn't exist or has been removed.</p>
+        <button class="btn btn-primary" @onclick="GoBack">
+            Back to Events
+        </button>
+    </div>
+}
+else
+{
+    <div class="loading">
+        <p>Loading event details...</p>
+    </div>
+}
+
+@code {
+    [Parameter] public int EventId { get; set; }
+    
+    private Event? eventItem;
+    private bool notFound = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventItem = await EventService.GetEventByIdAsync(EventId);
+        if (eventItem == null)
+        {
+            notFound = true;
+        }
+    }
+
+    private void RegisterForEvent()
+    {
+        Navigation.NavigateTo($"/register/{EventId}");
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/events");
+    }
+}
+
+<style>
+    .event-details-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .back-button {
+        margin-bottom: 20px;
+    }
+
+    .event-details-header {
+        position: relative;
+        height: 400px;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    .event-hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .event-hero-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        color: white;
+    }
+
+    .event-hero-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        color: white;
+        padding: 40px;
+    }
+
+    .event-hero-overlay h1 {
+        font-size: 2.5em;
+        margin-bottom: 16px;
+        font-weight: bold;
+    }
+
+    .event-quick-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+
+    .info-item {
+        font-size: 1.1em;
+    }
+
+    .event-details-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .event-description h2,
+    .event-info h2 {
+        color: #333;
+        margin-bottom: 16px;
+        font-size: 1.8em;
+    }
+
+    .event-description p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .info-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+    }
+
+    .info-card h3 {
+        margin-bottom: 8px;
+        color: #333;
+        font-size: 1.1em;
+    }
+
+    .info-card p {
+        margin: 4px 0;
+        color: #666;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+
+    .registration-card {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .registration-card h3 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .price-display {
+        margin-bottom: 20px;
+    }
+
+    .price {
+        font-size: 2em;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .price.free {
+        color: #28a745;
+    }
+
+    .register-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+        margin-bottom: 16px;
+    }
+
+    .registration-note {
+        font-size: 0.9em;
+        color: #666;
+        margin: 0;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s;
+    }
+
+    .btn-outline-secondary {
+        background-color: transparent;
+        color: #6c757d;
+        border: 1px solid #6c757d;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #1e7e34;
+    }
+
+    .btn-lg {
+        padding: 12px 24px;
+        font-size: 1.1em;
+    }
+
+    .not-found, .loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+    }
+
+    .not-found h1 {
+        color: #333;
+        margin-bottom: 16px;
+    }
+</style>

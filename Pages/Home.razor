@@ -1,0 +1,127 @@
+@page "/"
+@using EventEase_app.Models
+@using EventEase_app.Services
+@using EventEase_app.Components
+@using Microsoft.AspNetCore.Components
+@inject EventService EventService
+@inject NavigationManager Navigation
+
+<div class="hero-section">
+    <h1>Welcome to EventEase</h1>
+    <p class="lead">Discover and register for amazing events in your area</p>
+    <button class="btn btn-primary btn-lg" @onclick="NavigateToEvents">
+        Browse All Events
+    </button>
+</div>
+
+<div class="featured-events">
+    <h2>Featured Events</h2>
+    <div class="events-grid">
+        @if (featuredEvents != null)
+        {
+            @foreach (var eventItem in featuredEvents)
+            {
+                <EventCard EventData="@eventItem" 
+                          OnViewDetails="HandleViewDetails" 
+                          OnRegister="HandleRegister" />
+            }
+        }
+        else
+        {
+            <p>Loading events...</p>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Event>? featuredEvents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var allEvents = await EventService.GetEventsAsync();
+        // Show first 3 events as featured
+        featuredEvents = allEvents.Take(3).ToList();
+    }
+
+    private void NavigateToEvents()
+    {
+        Navigation.NavigateTo("/events");
+    }
+
+    private void HandleViewDetails(int eventId)
+    {
+        Navigation.NavigateTo($"/events/{eventId}");
+    }
+
+    private void HandleRegister(int eventId)
+    {
+        Navigation.NavigateTo($"/register/{eventId}");
+    }
+}
+
+<style>
+    .hero-section {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        margin-bottom: 40px;
+        border-radius: 8px;
+    }
+
+    .hero-section h1 {
+        font-size: 3em;
+        margin-bottom: 16px;
+        font-weight: bold;
+    }
+
+    .lead {
+        font-size: 1.3em;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .btn-lg {
+        padding: 12px 30px;
+        font-size: 1.2em;
+    }
+
+    .featured-events {
+        margin-top: 40px;
+    }
+
+    .featured-events h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+        font-size: 2.2em;
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
